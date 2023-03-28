@@ -203,8 +203,7 @@ def train_main():
             batch_size=int(config["batch_size"]), 
             shuffle=False, num_workers=0)
 
-    # name = f'Ar_xyzv_addTP{config["addTP"]}_batch{config["isBN"]}'
-    name = f'Ar_xyz_addTP{config["addTP"]}_batch{config["isBN"]}II' # II: switch val-test: corrected one 
+    name = f'Ar_xyzv_addTP{config["addTP"]}_batch{config["isBN"]}'
     res_dir = '/pscratch/sd/c/chunhui/RDF_rerun/res/Ar/1500frames'
     
     model = PointNetOneXY(config["l1"], config["l2"], config["l3"], config["l4"], config["l5"], 
@@ -222,55 +221,10 @@ def train_main():
     train_model(model, device, train_loader, val_loader, test_loader, 
                                optimizer, lr_scheduler, config["isSch"], res_dir, name, 20, 1000)
 
-def predict_on_test():
-    data_dir = "/data/chunhui_backup/simple_LJ_sys/diff_sys/data/train_val_test_split"
-
-    config = {
-        "batch_size": 512,
-        "dropout": 0,
-        "l1": 64,
-        "l2": 128,
-        "l3": 1024,
-        "l4": 512,
-        "l5": 512,
-        "lr": 0.001
-    }
-
-    # get dataset 
-    _, test_set, _ = load_data(data_dir)
-    
-    test_loader = torch.utils.data.DataLoader(
-            test_set, 
-            batch_size=int(config["batch_size"]), 
-            shuffle=False, num_workers=0)
-
-    addTP = True #False
-    batch = True
-
-    name = f'Ar_xyzvType_addTP{addTP}_batch{batch}'
-    res_dir = '/data/chunhui_backup/RDF_finer_rerun/Ar'
-    checkpoint_dir = os.path.join(res_dir, 'checkpoints')
-    checkpoint_path = os.path.join(checkpoint_dir, f'{name}.pt')
-    
-    model = PointNetRegxyzv(config["l1"], config["l2"], config["l3"], config["l4"], config["l5"], config["dropout"], addTP, batch)
-
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    # device = torch.device('cuda')
-    # if torch.cuda.device_count() > 1:
-    #     model = nn.DataParallel(model)
-    model.to(device)
-
-    # load the last checkpoint with the best model
-    model.load_state_dict(torch.load(checkpoint_path))
-    last_val_loss = test_accuracy(model, test_loader, res_dir, f'{name}_testEfficiency', device)
-
-    print("The final test loss: ", last_val_loss)
-
 if __name__ == '__main__': 
     import time 
     start_time = time.perf_counter()
     train_main() 
-    # predict_on_test()
     end_time = time.perf_counter() 
     print('time used to train model with 10 patience is: ', (end_time - start_time)/60, 'mins')
 

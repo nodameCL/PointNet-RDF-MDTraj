@@ -14,7 +14,7 @@ class MDtrajRDFxyzvTypeNPZ(data.Dataset):
         self.data_file = os.path.join(root,f'{split}_wPT.npz')
         self.data = np.load(self.data_file, allow_pickle=True)
 
-        self.x = torch.from_numpy(self.data['x'][:, :, :3].astype(np.float32)) # xyz or xyzvType
+        self.x = torch.from_numpy(self.data['x'].astype(np.float32)) # xyz or xyzvType
         self.y = torch.from_numpy(self.data['y'].astype(np.float32))
         self.sys = torch.from_numpy(self.data['PT'].astype(np.float32))
         self.frame = torch.from_numpy(self.data['frame'].astype(np.float32).reshape(-1, 1))

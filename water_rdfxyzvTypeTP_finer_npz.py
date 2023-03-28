@@ -221,50 +221,6 @@ def train_main():
     train_model(model, device, train_loader, val_loader, test_loader, 
                                optimizer, lr_scheduler, config["isSch"], res_dir, name, 20, 1000)
 
-def predict_on_test():
-    # data_dir = "/data/chunhui_backup/simple_LJ_sys/diff_sys/data/train_val_test_split"
-    data_dir = "/data/chunhui_backup/simple_LJ_sys/diff_sys/data/train_val_test_splitII"
-
-    config = {
-        "batch_size": 512,
-        "dropout": 0,
-        "l1": 64,
-        "l2": 128,
-        "l3": 1024,
-        "l4": 512,
-        "l5": 512,
-        "lr": 0.001
-    }
-
-    # get dataset 
-    _, test_set, _ = load_data(data_dir)
-    
-    test_loader = torch.utils.data.DataLoader(
-            test_set, 
-            batch_size=int(config["batch_size"]), 
-            shuffle=False, num_workers=0)
-
-    name = f'water_xyzvType_addTP{config["addTP"]}_batch{config["isBN"]}'
-    res_dir = '/data/chunhui_backup/RDF_finer_rerun/water_NPZ/500frames'
-
-    checkpoint_dir = os.path.join(res_dir, 'checkpoints')
-    checkpoint_path = os.path.join(checkpoint_dir, f'{name}.pt')
-
-    model = PointNetOne(config["l1"], config["l2"], config["l3"], config["l4"], config["l5"], 
-                            config["dropout"], config["isBN"], config["isLN"], config["pooling"], "water")
-
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    # device = torch.device('cuda')
-    # if torch.cuda.device_count() > 1:
-    #     model = nn.DataParallel(model)
-    model.to(device)
-
-    # load the last checkpoint with the best model
-    model.load_state_dict(torch.load(checkpoint_path))
-    last_val_loss = test_accuracy(model, test_loader, res_dir, f'{name}_testEfficiency', device)
-
-    print("The final test loss: ", last_val_loss)
-
 if __name__ == '__main__': 
     import time 
     start_time = time.perf_counter()
