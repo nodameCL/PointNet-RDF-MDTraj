@@ -2,7 +2,9 @@
 Predict RDF distribution from a single molecular configuration dumped from MD trajectory
 
 ## Data sets 
-The data used to train the model are compressed and available from https://zenodo.org/record/7776442#.ZCJ-7OzMKAo. 
+The data used to train the model and available at: https://zenodo.org/record/7776442. 
+
+*Due to the large amount of data, after decompressing the folder, the bz2 files inside also need to be decompressed to npz files.*
 
 ## train on different liquid systems  
 e.g. train on Ar system: `python Ar_rdfxyzPT_finer_NPZ.py`
