@@ -5,7 +5,7 @@ This repository contains the code and resources used in the paper:
 > Published in Journal of Chemical Information and Modeling, 2023 
 > Link to the paper: [https://pubs.acs.org/doi/10.1021/acs.jcim.3c00472](https://pubs.acs.org/doi/10.1021/acs.jcim.3c00472)
 
-Predict RDF distribution from a single molecular configuration dumped from MD trajectory. The original paper is found at 
+Predict RDF distribution from a single molecular configuration dumped from MD trajectory.
 ![RDF Prediction Example](figures/PointNet_MD_schematic.png)
 
 ## Data sets 
