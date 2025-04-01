@@ -19,6 +19,6 @@ The data used to train the model are available at: https://zenodo.org/record/777
 
 *Due to the large amount of data, after decompressing the folder, the bz2 files inside also need to be decompressed to npz files.*
 
-## train the model on different liquid systems  
+## Train the model on different liquid systems  
 e.g. train on Ar system: `python Ar_rdfxyzPT_finer_NPZ.py`
 
