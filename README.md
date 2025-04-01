@@ -1,5 +1,7 @@
 # PointNet-RDF-MDTraj
 Predict RDF distribution from a single molecular configuration dumped from MD trajectory
+![RDF Prediction Example](figures/PointNet_MD_schematic.png)
+
 
 ## Data sets 
 MD trajectories are stored in `NPZ` format. A `NPZ` file contains: 
