@@ -1,7 +1,12 @@
 # PointNet-RDF-MDTraj
-Predict RDF distribution from a single molecular configuration dumped from MD trajectory
-![RDF Prediction Example](figures/PointNet_MD_schematic.png)
+This repository contains the code and resources used in the paper:
+**"Rapid Prediction of a Liquid Structure from a Single Molecular Configuration Using Deep Learning"**  
+Authors: Chunhui Li, Benjamin Gilbert, Steven Farrell, Piotr Zarzycki 
+Published in Journal of Chemical Information and Modeling, 2023 
+Link to the paper: [https://pubs.acs.org/doi/10.1021/acs.jcim.3c00472](https://pubs.acs.org/doi/10.1021/acs.jcim.3c00472)
 
+Predict RDF distribution from a single molecular configuration dumped from MD trajectory. The original paper is found at 
+![RDF Prediction Example](figures/PointNet_MD_schematic.png)
 
 ## Data sets 
 MD trajectories are stored in `NPZ` format. A `NPZ` file contains: 
